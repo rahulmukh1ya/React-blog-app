@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import ReadMore from './parts/readMore'
+import Modal from 'components/common/modal'
+import useModal from 'hooks/useModal'
 
 const Blog = () =>{
 
     const [blogPosts,setBlogPosts] = useState([])
     const [number, setNumber] = useState(0)
+    const { isShowing, toggle } = useModal()
 
     
 
@@ -48,6 +51,14 @@ const Blog = () =>{
             {blogPosts.map(renderBlogTitle)}
         </div>
             <div onClick={loadMorePosts}>Load More Blog Posts</div>
+            <div onClick={toggle}>Load Popup</div>
+            <Modal 
+            isShowing={isShowing} 
+            hide={toggle}
+            heading= "I am heading"
+            content = "This is my content"
+            footer= "This is footer content"
+            />
         </div>
     )
 }
